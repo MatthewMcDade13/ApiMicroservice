@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "How To";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MicroService - @ViewBag.Title</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body style="text-align: center;">
+
+
+
+    <div id="wrapper">
+
+        <h1>TimeStamp Microservice</h1>
+
+        <div class="jumbotron">
+            <div>
+                <h3>Examples of Use:</h3>
+                <code>http://thisdomain/api/timestamp/January 5 2017</code>
+                <br />
+                <code>http://thisdomain/api/timestamp/1483574400</code>
+            </div>
+            <div>
+                <h3>Example Output:</h3>
+                <code>{"unix":1483574400,"natural":"January 05, 2017"}</code>
+            </div>
+        </div>
+
+        <h1>Header Parser Microservice</h1>
+
+        <div class="jumbotron">
+            <div>
+                <h3>Example of Use:</h3>
+                <code>http://thisdomain/api/findme</code>
+            </div>
+            <div>
+                <h3>Example Output:</h3>
+                <code>{"ipaddress": "{Your Ip Adress}", "software": "Windows NT 10.0; Win64; x64", "language": "en-US"}</code>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <strong>-Matthew McDade</strong>
+        <a href="https://www.linkedin.com/in/matthew-mcdade-903325138/"><i class="fa fa-linkedin"></i></a>
+        <a href="https://github.com/MatthewMcDade13"><i class="fa fa-github"></i></a>
+        <a href="https://www.freecodecamp.com/matthewmcdade13"><i class="fa fa-free-code-camp"></i></a>
+        <a href="http://codepen.io/MatthewMcDade13/"><i class="fa fa-codepen"></i></a>
+    </footer>
+
+
+</body>
+</html>

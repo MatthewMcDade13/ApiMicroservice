@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace ApiMicroService
 {
@@ -28,7 +31,13 @@ namespace ApiMicroService
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddLocalization();
+
+            services.AddMvc()
+                .AddJsonOptions( options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +46,30 @@ namespace ApiMicroService
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseMvc();
+            //Configure Localization
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
+
+            app.UseStaticFiles();
+
+            //Used for getting Header Details
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+                                   ForwardedHeaders.XForwardedProto
+            });
+
+            app.UseMvc(config =>
+            {
+                config.MapRoute(
+                    "Default",
+                    "{controller}/{action}/{id?}",
+                    new { controller = "Home", action = "Index" });
+
+                config.MapRoute("ApiError",
+                              "api/{*url}",
+                              new { controller = "Error", action = "Http404" });
+            });
         }
     }
 }
