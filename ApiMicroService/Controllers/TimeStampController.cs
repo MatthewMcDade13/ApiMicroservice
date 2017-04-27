@@ -10,7 +10,7 @@ namespace ApiMicroService.Controllers
     [Route("api/[controller]")]
     public class TimeStampController : Controller
     {
-
+        
         // GET api/values
         [HttpGet]
         public IActionResult Get()
