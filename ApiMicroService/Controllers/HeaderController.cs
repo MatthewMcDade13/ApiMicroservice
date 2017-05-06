@@ -26,7 +26,7 @@ namespace ApiMicroService.Controllers
             os = os.Replace('(', ' ');
             os = os.Replace(')', ' ').Trim();
 
-            string ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            string ip = Request.HttpContext.Connection.RemoteIpAddress.ScopeId.ToString();
 
             string language = Request.HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.ToString();
 
